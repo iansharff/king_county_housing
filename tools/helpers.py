@@ -15,6 +15,30 @@ def display_percent_nan(df):
         print(f"{column} : {100 * series.at[column]:.2f} % null")
 
 
+def log_transform(data, col_names):
+    """Transform selected columns in pd.DataFrame with natural logarithm"""
+    if isinstance(col_names, list):
+        for col in col_names:
+            data[col] = np.log(data[col])
+    elif isinstance(col_names, str):
+        data[col_names] = np.log(data[col_names])
+    else:
+        raise TypeError("col_names must be a list or a string")
+    return None
+
+
+def exp_transform(data, col_names):
+    """Transform selected columns in pd.DataFrame with exponential function"""
+    if isinstance(col_names, list):
+        for col in col_names:
+            data[col] = np.exp(data[col])
+    elif isinstance(col_names, str):
+        data[col_names] = np.exp(data[col_names])
+    else:
+        raise TypeError("col_names must be a list or a string")
+    return None
+
+
 def remove_outliers(data, col_names=None, criteria='normal'):
     """
     Remove outlier data points (rows) from a DataFrame according to a criteria
