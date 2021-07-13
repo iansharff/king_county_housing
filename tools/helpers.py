@@ -19,11 +19,15 @@ def display_percent_nan(df):
         print(f"{column} : {100 * series.at[column]:.2f} % null")
 
 
-def get_value_counts(df):
+def get_value_counts(df, highest_two=False):
     """Display value counts values in each column of a DataFrame"""
     for col in df.columns:
         print(col, ':')
-        print(df[col].value_counts(dropna=False))
+        counts = df[col].value_counts(dropna=False)
+        if highest_two:
+            print(counts.head(2), '\n')
+        else:
+            print(counts, '\n')
 
 
 # TRANSFORM AND TRIM FUNCTIONS
