@@ -1,5 +1,9 @@
 import numpy as np
 import pandas as pd
+import scipy.stats as stats
+
+
+# DIAGNOSTIC FUNCTIONS
 
 def percent_nan(df):
     """Return a Series of percent NaN values in each column of a DataFrame"""
@@ -21,6 +25,8 @@ def get_value_counts(df):
         print(col, ':')
         print(df[col].value_counts(dropna=False))
 
+
+# TRANSFORM AND TRIM FUNCTIONS
 
 def log_transform(data, col_names):
     """Transform selected columns in pd.DataFrame with natural logarithm"""
