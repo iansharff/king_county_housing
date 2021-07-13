@@ -15,6 +15,13 @@ def display_percent_nan(df):
         print(f"{column} : {100 * series.at[column]:.2f} % null")
 
 
+def get_value_counts(df):
+    """Display value counts values in each column of a DataFrame"""
+    for col in df.columns:
+        print(col, ':')
+        print(df[col].value_counts(dropna=False))
+
+
 def log_transform(data, col_names):
     """Transform selected columns in pd.DataFrame with natural logarithm"""
     if isinstance(col_names, list):
