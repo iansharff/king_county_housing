@@ -46,6 +46,11 @@ def exp_transform(data, col_names):
     return None
 
 
+def mode_fill(df, column=None):
+    if column:
+        df[column].fillna(df[column].mode()[0], inplace=True)
+
+
 def remove_outliers(data, col_names=None, criteria='normal'):
     """
     Remove outlier data points (rows) from a DataFrame according to a criteria
