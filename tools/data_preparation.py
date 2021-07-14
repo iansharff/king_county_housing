@@ -8,7 +8,7 @@ from tools.helpers import remove_outliers, mode_fill
 def initial_clean(df):
     """Cast to numeric types, fill NaN values with the feature mode"""
     # Drop 'id' column
-    final_df = df
+    final_df = df.copy()
     final_df.drop('id', axis=1, inplace=True)
 
     # Convert 'date' to pd.datetime
