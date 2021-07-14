@@ -61,6 +61,17 @@ def mode_fill(df, column=None):
         df[column].fillna(df[column].mode()[0], inplace=True)
 
 
+def normalize(data, col_names):
+    if isinstance(col_names, list):
+        for col in col_names:
+            data[col] = stats.zscore(data[col])
+    elif isinstance(col_names, str):
+        data[col_names] = stats.zscore(data[col_names])
+    else:
+        raise TypeError("col_names must be a list or a string")
+    return None
+
+
 def remove_outliers(data, col_names=None, criteria='normal'):
     """
     Remove outlier data points (rows) from a DataFrame according to a criteria
