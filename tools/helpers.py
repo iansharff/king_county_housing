@@ -47,7 +47,7 @@ def predictor_corrs(X, cutoff=0.60):
 
     corrs.columns = ['cc']
 
-    high_cc = corrs[(corrs.cc > .60) & (corrs.cc < 1)]
+    high_cc = corrs[(corrs.cc > cutoff) & (corrs.cc < 1)]
     return high_cc
 
 

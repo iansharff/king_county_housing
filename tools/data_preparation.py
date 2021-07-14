@@ -31,13 +31,13 @@ def add_distance(df):
 
     # Store lat and long of zipcode with highest price
     lat, long = zip_avg_price.sort_values('price', ascending=False).iloc[0, 2:]
-    print(lat, long)
     df['lat_cent'] = lat
     df['long_cent'] = long
     eval_formula = """
     dist_from_center = ((lat - lat_cent)**2 + (long - long_cent)**2) ** 0.5
     """
     df.eval(eval_formula, inplace=True)
+    df.drop(['lat_cent', 'long_cent'], axis=1, inplace=True)
     return None
 
 
