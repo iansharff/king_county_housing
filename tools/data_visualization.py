@@ -16,7 +16,7 @@ def null_heatmap(df, cmap='Greens_r'):
 
 
 def corr_heatmap(df):
-    corr = df.drop('price', axis=1).corr()
+    corr = df.corr()
     mask = np.zeros_like(corr)
     mask[np.triu_indices_from(mask)] = True
 
