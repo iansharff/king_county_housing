@@ -30,6 +30,20 @@ def get_value_counts(df, highest_two=False):
             print(counts, '\n')
 
 
+def predictor_corrs(X):
+    """Calculates pairs in X with highest pairwise correlations to determine multicollinearity"""
+    corrs = X.corr().abs().stack().reset_index().sort_values(0, ascending=False)
+    corrs['pairs'] = list(zip(corrs.level_0, corrs.level_1))
+    corrs.drop(['level_0', 'level_1'], axis=1, inplace=True)
+    corrs.set_index('pairs', inplace=True)
+    corrs.drop_duplicates(inplace=True)
+
+    corrs.columns = ['cc']
+
+    high_cc = corrs[(corrs.cc > .60) & (corrs.cc < 1)]
+    return high_cc
+
+
 # TRANSFORM AND TRIM FUNCTIONS
 
 def log_transform(data, col_names):
