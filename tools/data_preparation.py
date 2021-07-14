@@ -22,3 +22,26 @@ def initial_clean(df):
         mode_fill(final_df, col)
 
     return final_df
+
+
+def add_distance(df):
+    """Add column of distance from the center of the zipcode with the highest average price"""
+    # Make DataFrame of zipcodes with their average prices and coordinates
+    zip_avg_price = df.groupby('zipcode')[['price', 'lat', 'long']].mean().reset_index()
+
+    # Store lat and long of zipcode with highest price
+    lat, long = zip_avg_price.sort_values('price', ascending=False).iloc[0, 2:]
+    df['lat_cent'] = lat
+    df['long_cent'] = long
+    eval_formula = """
+    dist_from_center = ((lat - lat_cent)**2 + (long - long_cent)**2) ** 0.5
+    """
+    df.eval(eval_formula, inplace=True)
+    df.drop(['lat_cent', 'long_cent'], axis=1, inplace=True)
+    return None
+
+
+if __name__ == '__main__':
+    df = initial_clean(pd.read_csv('../data/kc_house_data.csv'))
+    add_distance(df)
+    print(df)
