@@ -173,7 +173,8 @@ def remove_outliers(data, col_names=None, criteria='normal'):
             q1 = final[col].quantile(0.25)
             q3 = final[col].quantile(0.75)
             limit = 1.5 * (q3 - q1)
-            (final[col] < (q1 - limit)) | (final[col] > (q3 + limit))
+            mask = (final[col] > (q1 - limit)) | (final[col] < (q3 + limit))
+            final = final[mask]
     return final
 
 
@@ -183,4 +184,7 @@ def MAPE(Y_actual, Y_Predicted):
 
 
 if __name__ == '__main__':
-    df = []
+    df = pd.read_csv('../data/kc_house_data.csv')
+    test = remove_outliers(df, 'bedrooms', 'normal')
+    print(test.describe().bedrooms)
+    print(test.shape[0])
