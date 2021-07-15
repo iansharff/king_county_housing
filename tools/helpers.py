@@ -111,3 +111,7 @@ def remove_outliers(data, col_names=None, criteria='normal'):
         # Remove all data points with zscore >= 3
         final = final[(np.abs(stats.zscore(final[col])) < 3)]
     return final
+
+def MAPE(Y_actual,Y_Predicted):
+    mape = np.mean(np.abs((Y_actual - Y_Predicted)/Y_actual))*100
+    return mape
