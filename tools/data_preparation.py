@@ -6,7 +6,9 @@ from tools.helpers import remove_outliers, mode_fill
 
 
 def initial_clean(df):
-    """Cast to numeric types, fill NaN values with the feature mode"""
+    """
+    This function carries out the initial cleaning process for a DataFrame
+    """
     # Drop 'id' column
     final_df = df.copy()
     final_df.drop('id', axis=1, inplace=True)
@@ -20,6 +22,20 @@ def initial_clean(df):
     # Mode fill NaN values in 'waterfront', 'yr_renovated', and 'view'
     for col in ['waterfront', 'yr_renovated', 'view', 'sqft_basement']:
         mode_fill(final_df, col)
+
+    # Drop significant outliers from continuous features
+    cols_w_outliers = [
+        'price',
+        'sqft_living',
+        'sqft_above',
+        'sqft_living15',
+        'bedrooms',
+        'bathrooms'
+    ]
+
+    final_df = remove_outliers(final_df, col_names=cols_w_outliers, criteria='normal')
+
+    add_distance(final_df)
 
     return final_df
 
@@ -44,4 +60,5 @@ def add_distance(df):
 if __name__ == '__main__':
     df = initial_clean(pd.read_csv('../data/kc_house_data.csv'))
     add_distance(df)
-    print(df)
+    print(df.info())
+    print(df.describe())
