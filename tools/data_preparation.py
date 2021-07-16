@@ -38,7 +38,7 @@ def initial_clean(df, bakeoff=False):
         'bedrooms',
         'bathrooms'
     ]
-    if bakeoff:
+    if not bakeoff:
         final_df = remove_outliers(final_df, col_names=cols_w_outliers, criteria='normal')
 
     add_distance(final_df, bakeoff)
