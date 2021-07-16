@@ -42,6 +42,8 @@ This led us to the conclusion that, while most features were in some way correla
 
 The `lat` and `long` features denoting the houses' geographical coordinates were, however, used to calculate the distance from the most expensive zipcode in King County, 98039. We determined this after constructing the following choropleth map using the `folium` library
 
+
+
 ## Data Preparation
 
 ## Model Training and Testing
