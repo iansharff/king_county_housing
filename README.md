@@ -1,4 +1,4 @@
-# *King County Housing: Predicting House Prices with Multiple Linear Regression*
+# **King County Housing: Predicting House Prices with Multiple Linear Regression**
 
 Ian Sharff, Samantha Baltodano, and Sanjit Varma
 
@@ -61,13 +61,15 @@ As mentioned previously, the engineered feature, `dist_from_center` was added by
 
 ## Model Training and Testing
 
-The first model included in our Jupyter Notebook highlighting this our process was a baseline model created with sci-kit learn's `DummyRegressor`, which simply predicted the mean price for every data point without factoring in the independent variables. While in this context it may have proven redundant, yielding an (expected) R-squared value of 0, this was done to get a feel for the importance of baseline models in machine learning in general. Following this, a simple linear regression was conducted with `price` and `sqft_living`, since they were the most heavily correlated in the original, untrimmed dataset. 
+The first model included in our Jupyter Notebook highlighting this our process was a baseline model created with sci-kit learn's `DummyRegressor`, which simply predicted the mean price for every data point without factoring in the independent variables. While in this context it may have proven redundant, yielding an (expected) R-squared value of 0, this was done to get a feel for the importance of baseline models in machine learning in general.
+    Following this, a simple linear regression was conducted with `price` and `sqft_living`, since they were the most heavily correlated in the original, untrimmed dataset. While the `grade` feature had a slightly higher correlation with `price` than `sqft_living` (0.63 and 0.62), these two were highly correlated with one another (0.70) and we found that a discrete variable would be unsuitable for a simple linear regression model. However, for future models we could easily convert grade to a suitable format in the dataset with [ordinal encoding](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html).
+    The simple linear regression yieled an R-squared of roughly 0.50, and this was improved upon when adding other variables to perform a multiple linear regression. We were able to achieve an R-squared value of 0.63 with this improved model, followed by an R-squared of 0.77 when applying the `PolynomialFeatures` transformer followed by linear regression. Finally, we applied the powerful `GradientBoostRegressor` model available from `sklearn` to the polynomial-transformed dataset to achieve an R-squared score of 0.86, but there is definitely still room for improvement. 
 
 ## Analysis and Conclusions
 
 An important takeaway from this study is that a home's living space square footage and its location are two of the most important factors contributing to its price. In addition to this, we found that many metrics used to determine a house's value are largely dependent on one another. To provide an intuitive example, it would make sense that a larger home would recieve a higher grade, and this correlation could lead to overfitting of a simplistic model like multiple linear regression. As such, future iterations of this project should include more thorough use of the `GradientBoostRegressor` estimator from `sklearn.ensemble` to arrive at a more accurate model.
 
-In addition, the use of coordinates and the presence of "nearest 15 neighbors" features in the initial dataset has led us to conclude that an implementation of the K-Nearest Neighbor algorithm to this and other similar datasets would be a fruitful endeavor. Only so much can be accomplished in a week of work, but throughout the course of this study we now understand that there are many avenues for us to take in improving the models as they exist now.
+In addition, the use of coordinates and the presence of "nearest 15 neighbors" features in the initial dataset has led us to conclude that an implementation of the K-Nearest Neighbor algorithm to this and other similar datasets would be a fruitful endeavor. Only so much can be accomplished in a week of work, but throughout the course of this study we now understand that there are many avenues for us to take in improving our models as they exist now. In future iterations of this project, we will aim to improve data-preprocessing and handling of categorical/ordinal features, conduct more extensive and systematic cross-validation, and make further use of more powerful models and algorithms to improve our accuracy.
 
 ## Contributors
 - Samantha Baltodano <br>
