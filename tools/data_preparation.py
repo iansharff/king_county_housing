@@ -16,7 +16,8 @@ def initial_clean(df, bakeoff=False):
     """
     # Drop 'id' column
     final_df = df.copy()
-    final_df.drop('id', axis=1, inplace=True)
+    if not bakeoff:
+        final_df.drop('id', axis=1, inplace=True)
 
     # Convert 'date' to pd.datetime
     final_df['date'] = pd.to_datetime(final_df['date'])
@@ -37,7 +38,7 @@ def initial_clean(df, bakeoff=False):
         'bedrooms',
         'bathrooms'
     ]
-    if not bakeoff:
+    if bakeoff:
         final_df = remove_outliers(final_df, col_names=cols_w_outliers, criteria='normal')
 
     add_distance(final_df, bakeoff)
