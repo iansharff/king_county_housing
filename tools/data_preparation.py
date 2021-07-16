@@ -7,8 +7,10 @@ from sklearn.model_selection import train_test_split, cross_val_score
 
 from tools.helpers import remove_outliers, mode_fill
 
+LAT, LONG = 47.62730588235295, -122.2334117647059
 
-def initial_clean(df):
+
+def initial_clean(df, bakeoff=False):
     """
     This function carries out the initial cleaning process for a DataFrame
     """
@@ -38,18 +40,21 @@ def initial_clean(df):
 
     final_df = remove_outliers(final_df, col_names=cols_w_outliers, criteria='normal')
 
-    add_distance(final_df)
+    add_distance(final_df, bakeoff)
 
     return final_df
 
 
-def add_distance(df):
+def add_distance(df, bakeoff=False):
     """Add column of distance from the center of the zipcode with the highest average price"""
     # Make DataFrame of zipcodes with their average prices and coordinates
-    zip_avg_price = df.groupby('zipcode')[['price', 'lat', 'long']].mean().reset_index()
+    lat, long = LAT, LONG
 
-    # Store lat and long of zipcode with highest price
-    lat, long = zip_avg_price.sort_values('price', ascending=False).iloc[0, 2:]
+    if not bakeoff:
+        zip_avg_price = df.groupby('zipcode')[['price', 'lat', 'long']].mean().reset_index()
+
+        # Store lat and long of zipcode with highest price
+        lat, long = zip_avg_price.sort_values('price', ascending=False).iloc[0, 2:]
     df['lat_cent'] = lat
     df['long_cent'] = long
     eval_formula = """
@@ -60,12 +65,7 @@ def add_distance(df):
     return None
 
 
-def cross_validate_model(X, y):
-    pass
-
-
 if __name__ == '__main__':
     df = initial_clean(pd.read_csv('../data/kc_house_data.csv'))
-    add_distance(df)
     print(df.info())
     print(df.describe())
