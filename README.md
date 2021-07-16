@@ -34,9 +34,13 @@ The data provided to us consist of information pertaining to over 20,000 house s
 * `lat`, `long`, and `zipcode` - which conveyed valuable locational information regarding the homes
 * `bedrooms` and `bathrooms` - two important metrics for most, if not all, homebuyers.
 
-Of course, all features have the capacity to provide valuable insight property price. However, within the constraints of a basic multiple linear regression model, including many features runs the risk of having multicollinearity among features, which can be a detriment to the quality of the predictive capacity of a model. To visualize this, we frequently used the follwing heatmap visualization to quantify the pairwise correlations between the features and the target.
+Of course, all features have the capacity to provide valuable insight property price. However, within the constraints of a basic multiple linear regression model, including many features runs the risk of having multicollinearity among features, which can be a detriment to the quality of the predictive capacity of a model. To visualize this, we frequently used the follwing heatmap visualization to quantify the pairwise correlations between the features and the target. See the [data visualization](tools/data_visualization.py) script for its implementation.
 
 ![correlation_heatmap](.images/correlation_heatmap.png)
+
+This led us to the conclusion that, while most features were in some way correlated with a given house's price, we would have to selectively choose which features to minimize multicollinearity. Certain features like `sqft_living15` and `sqft_lot15`, which denote the average living space/lot square footage of a house's nearest 15 neighbors, caught our attention, but were (unsurprisingly) found to be highly correlated with their analogous features `sqft_living` and `sqft_lot` which describe the individual houses. These features definitely have potential, but in the context of this study they were left aside.
+
+The `lat` and `long` features denoting the houses' geographical coordinates were, however, used to calculate the distance from the most expensive zipcode in King County, 98039. We determined this after constructing the following choropleth map using the `folium` library
 
 ## Data Preparation
 
