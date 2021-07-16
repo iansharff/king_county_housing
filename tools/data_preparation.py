@@ -56,6 +56,7 @@ def add_distance(df, bakeoff=False):
 
         # Store lat and long of zipcode with highest price
         lat, long = zip_avg_price.sort_values('price', ascending=False).iloc[0, 2:]
+
     df['lat_cent'] = lat
     df['long_cent'] = long
     eval_formula = """
