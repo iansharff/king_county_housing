@@ -61,6 +61,8 @@ As mentioned previously, the engineered feature, `dist_from_center` was added by
 
 ## Model Training and Testing
 
+The first model included in our Jupyter Notebook highlighting this our process was a baseline model created with sci-kit learn's `DummyRegressor`, which simply predicted the mean price for every data point without factoring in the independent variables. While in this context it may have proven redundant, yielding an (expected) R-squared value of 0, this was done to get a feel for the importance of baseline models in machine learning in general. Following this, a simple linear regression was conducted with `price` and `sqft_living`, since they were the most heavily correlated in the original, untrimmed dataset. 
+
 ## Analysis and Conclusions
 
 An important takeaway from this study is that a home's living space square footage and its location are two of the most important factors contributing to its price. In addition to this, we found that many metrics used to determine a house's value are largely dependent on one another. To provide an intuitive example, it would make sense that a larger home would recieve a higher grade, and this correlation could lead to overfitting of a simplistic model like multiple linear regression. As such, future iterations of this project should include more thorough use of the `GradientBoostRegressor` estimator from `sklearn.ensemble` to arrive at a more accurate model.
