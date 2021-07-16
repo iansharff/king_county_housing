@@ -57,7 +57,7 @@ Nearly all practical datasets will contain null values that need to be addressed
 
 In each of these cases, we found it appropriate to fill these columns with their modes, which represented the overwhelming majority of values pertaining to each feature (most houses hadn't been viewed, most were not waterfront properties, etc.). However, these features were not heavily considered either due to high correlation with the living space square footage or becuase they did not improve models to a large enough extent to warrant adding further multicollinearity to the models. More on that in the next section.
 
-As mentioned previously, the engineered feature, `dist_from_center` was added by calculating the Euclidian distance from the average coordinates of houses in the most expensive zipcode on average (see the `add_distance` function in ![data preparation](tools/data_preparation.py) script for the implementation). 
+As mentioned previously, the engineered feature, `dist_from_center` was added by calculating the Euclidian distance from the average coordinates of houses in the most expensive zipcode on average (see the `add_distance` function in [data preparation](tools/data_preparation.py) script for the implementation). 
 
 ## Model Training and Testing
 
