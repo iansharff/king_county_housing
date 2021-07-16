@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split, cross_val_score
+
 
 from tools.helpers import remove_outliers, mode_fill
 
@@ -55,6 +58,10 @@ def add_distance(df):
     df.eval(eval_formula, inplace=True)
     df.drop(['lat_cent', 'long_cent'], axis=1, inplace=True)
     return None
+
+
+def cross_validate_model(X, y):
+    pass
 
 
 if __name__ == '__main__':
