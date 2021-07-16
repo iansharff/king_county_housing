@@ -27,7 +27,16 @@ We framed our business problem from the perspective of Zillow, a company that re
 
 ## Data Understanding
 
-The data provided to us consist of information pertaining to over 20,000 house sales carried out between 2014 and 2015, located in the `data/kc_house_data.csv` file in this repository along with the `data/column_names.md` data dictionary summarizing the information contained in each of the 19 relevant features, not inluding the `id` column which can be discarded for our purposes. To
+The data provided to us consist of information pertaining to over 20,000 house sales carried out between 2014 and 2015, located in the `data/kc_house_data.csv` file in this repository along with the `data/column_names.md` data dictionary summarizing the information contained in each of the 19 relevant features, not inluding the `id` column which can be discarded for our purposes. Some salient features that were found to have high correlation with the sale price were:
+
+* `sqft_living` -  the area in square feet of the living space of the home
+* `grade` and `condition` - two indicators of the subjective quality of the home
+* `lat`, `long`, and `zipcode` - which conveyed valuable locational information regarding the homes
+* `bedrooms` and `bathrooms` - two important metrics for most, if not all, homebuyers.
+
+Of course, all features have the capacity to provide valuable insight property price. However, within the constraints of a basic multiple linear regression model, including many features runs the risk of having multicollinearity among features, which can be a detriment to the quality of the predictive capacity of a model. To visualize this, we frequently used the follwing heatmap visualization to quantify the pairwise correlations between the features and the target.
+
+![correlation_heatmap](.images/correlation_heatmap.png)
 
 ## Data Preparation
 
